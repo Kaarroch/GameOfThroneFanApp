@@ -26,6 +26,5 @@ export class HomeComponent {
 
     constructor(private accountService: AccountService, private bookService: BookService, private characterService: CharacterService, private houseService: HouseService ) {
         this.user = this.accountService.userValue;
-        
     }
 }
