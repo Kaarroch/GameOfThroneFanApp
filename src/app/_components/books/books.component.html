@@ -1,5 +1,21 @@
-<div *ngFor="let name of livre" style="text-align:center; font-size: 10px">
-    <p style="font-size: 20px;">
-        {{ name.name }}
-    </p>
-</div>
+<label style="text-transform: none;">Trier par : </label>
+    <select (onChange)="filter($event)" placeholder="Select a filter">
+        <option value="name">Nom</option>
+        <option value="fromReleaseDate">Date de parution</option>
+    </select>
+
+
+    <div *ngFor="let name of livre" (click)="toggleDisplay()">
+        <p style="font-size: 20px;">{{ name.name }}</p>
+            <div *ngIf = "isShow" style="font-size: 15px;">
+                <p>Numéro isbn : {{ name.isbn }}</p>
+                <p>Autheur : {{ name.authors }}</p>
+                <p>Nombre de pages : {{ name.numberOfPages }}</p>
+                <p>Editeur : {{ name.publisher }}</p>
+                <p>Pays dans lequel le livre a été publié : {{ name.country }}</p>
+                <p>Type de média : {{ name.mediaType }}</p>
+                <p>Date de publication : {{ name.released }}</p>
+                <p>Personnages : {{ name.characters }}</p>
+                <p>Personnages avec un POV : {{ name.povCharacters }}</p>
+            </div>
+    </div>

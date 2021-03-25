@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { Book } from '../_models/Book';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +12,10 @@ export class BookService {
   getBook(): Observable<Book> {
     return this.httpClient.get<BookResponse>('https://www.anapioficeandfire.com/api/books')
       .pipe(map(convertBookResponseToBook));
+  }
+
+  filterBooks(filter): Observable<Book[]>{
+    return this.httpClient.get<Book[]>(`https://www.anapioficeandfire.com/api/books?sort=${filter}`);
   }
 }
 

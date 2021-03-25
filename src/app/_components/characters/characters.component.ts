@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { Character } from '../../_models/character';
+import { CharacterService } from '../../_services/character.service';
 
 @Component({
   selector: 'app-characters',
@@ -8,7 +10,8 @@ import { HttpClient } from "@angular/common/http";
 })
 export class CharactersComponent implements OnInit {
   personnage:any = []
-  constructor(private http: HttpClient) { }
+  isShow:boolean = false;
+  constructor(private http: HttpClient, private characterService: CharacterService) { }
 
   getData(){
     const url ='https://www.anapioficeandfire.com/api/characters'
@@ -18,7 +21,17 @@ export class CharactersComponent implements OnInit {
     })
   }
 
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   ngOnInit() {
     this.getData()
+  }
+
+  filter(data){
+    this.characterService.filterCharacters(data.detail.value).subscribe(response =>{
+      this.personnage = response;
+    })
   }
 }

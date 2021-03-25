@@ -1,5 +1,28 @@
-<div *ngFor="let name of personnage" style="text-align:center; font-size: 10px">
-    <p style="font-size: 20px;">
-        {{ name.name }}
-    </p>
-</div>
+<label style="text-transform: none;">Trier par : </label>
+    <select (onChange)="filter($event)" placeholder="Select a filter">
+        <option value="name">Nom</option>
+        <option value="gender">Sexe</option>
+        <option value="culture">Culture</option>
+        <option value="born">Date de naissance</option>
+        <option value="died">Date de décès</option>
+        <option value="isAlive">Est vivant</option>
+    </select>
+
+    <div *ngFor="let name of personnage" (click)="toggleDisplay()">
+        <p style="font-size: 20px;">{{ name.name }}</p>
+            <div *ngIf = "isShow" style="font-size: 15px;">
+                <p>Culture : {{ name.culture }}</p>
+                <p>Date Naissance : {{ name.born }}</p>
+                <p>Date de décès : {{ name.died }}</p>
+                <p>Titre : {{ name.titre }}</p>
+                <p>Aliases : {{ name.aliases }}</p>
+                <p>Père : {{ name.father }}</p>
+                <p>Mère : {{ name.mother }}</p>
+                <p>Epoux/se : {{ name.spouse }}</p>
+                <p>Loyal envers : {{ name.allegiances }}</p>
+                <p>Livres dans lesquels il apparaît: {{ name.books }}</p>
+                <p>Livres dans lequel il a un POV : {{ name.povBooks }}</p>
+                <p>Apparaît dans les saisons : {{ name.tvSeries }}</p>
+                <p>Joué par : {{ name.playedBy }}</p>
+            </div>
+    </div>

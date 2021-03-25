@@ -14,6 +14,9 @@ export class CharacterService {
       .pipe(map(convertCharacterResponseToCharacter));
   }
 
+  filterCharacters(filter): Observable<Character[]>{
+    return this.httpClient.get<Character[]>(`https://www.anapioficeandfire.com/api/books?sort=${filter}`);
+  }
 }
 
 function convertCharacterResponseToCharacter(response: CharacterResponse): Character {

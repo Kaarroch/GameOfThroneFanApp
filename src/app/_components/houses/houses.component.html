@@ -1,5 +1,25 @@
-<div *ngFor="let name of maison" style="text-align:center; font-size: 10px">
-    <p style="font-size: 20px;">
-        {{ name.name }}
-    </p>
-</div>
+<label style="text-transform: none;">Trier par : </label>
+    <select (onChange)="filter($event)" placeholder="Select a filter">
+        <option value="name">Nom</option>
+        <option value="region">Région</option>
+        <option value="words">Mots</option>
+    </select>
+
+    <div *ngFor="let name of maison" (click)="toggleDisplay()">
+        <p style="font-size: 20px;">{{ name.name }}</p>
+            <div *ngIf = "isShow" style="font-size: 15px;">
+                <p>Région : {{ name.region }}</p>
+                <p>Armoiries : {{ name.coatOfArms }}</p>
+                <p>Mots : {{ name.words }}</p>
+                <p>Titres : {{ name.titles }}</p>
+                <p>Sièges : {{ name.seats }}</p>
+                <p>Propriétaire : {{ name.currentLord }}</p>
+                <p>Héritier : {{ name.heir }}</p>
+                <p>Construction : {{ name.founded }}</p>
+                <p>Constructeurs : {{ name.founder }}</p>
+                <p>Destruction : {{ name.diedOut }}</p>
+                <p>Armes ancestrales : {{ name.ancestralWeapons }}</p>
+                <p>Maisons cadettes : {{ name.cadetBranches }}</p>
+                <p>Membres loyaux de cette maison: {{ name.swornMembers }}</p>
+            </div>
+    </div>

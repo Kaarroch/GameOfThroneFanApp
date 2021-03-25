@@ -14,6 +14,10 @@ export class HouseService {
       .pipe(map(convertHouseResponseToHouse));
   }
 
+  filterHouses(filter): Observable<House[]>{
+    return this.httpClient.get<House[]>(`https://www.anapioficeandfire.com/api/houses?sort=${filter}`);
+  }
+
 }
 
 function convertHouseResponseToHouse(response: HouseResponse): House {

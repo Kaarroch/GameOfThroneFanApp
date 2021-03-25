@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { House } from '../../_models/house';
+import { HouseService } from '../../_services/house.service';
 
 @Component({
   selector: 'app-houses',
@@ -7,8 +9,9 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ['./houses.component.css']
 })
 export class HousesComponent implements OnInit {
-  maison:any = []
-  constructor(private http: HttpClient) { }
+  maison:any = [];
+  isShow:boolean = false;
+  constructor(private http: HttpClient, private houseService: HouseService) { }
 
   getData(){
     const url ='https://www.anapioficeandfire.com/api/houses'
@@ -18,7 +21,17 @@ export class HousesComponent implements OnInit {
     })
   }
 
+  toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
+
   ngOnInit() {
     this.getData()
+  }
+
+  filter(data){
+    this.houseService.filterHouses(data.detail.value).subscribe(response =>{
+      this.maison = response;
+    })
   }
 }
